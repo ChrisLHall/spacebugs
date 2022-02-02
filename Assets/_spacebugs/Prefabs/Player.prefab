@@ -76,6 +76,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7935e1a8946b6ee4f8db62f57cc55a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 3
+  moveAction: {fileID: -8809842042273308291, guid: 9933d0c68cae23745a36a26d73235743, type: 3}
+  shootAction: {fileID: -6312536980358893805, guid: 9933d0c68cae23745a36a26d73235743, type: 3}
+  playerBulletPrefab: {fileID: 8211497932755920015, guid: f6e241cb4116aed4fa525a86694663cf, type: 3}
 --- !u!1001 &3681754089204271301
 PrefabInstance:
   m_ObjectHideFlags: 0
