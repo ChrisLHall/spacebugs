@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public InputActionReference moveAction;
     public InputActionReference shootAction;
-
+    
     public GameObject playerBulletPrefab;
 
     private Rigidbody rigidBody;

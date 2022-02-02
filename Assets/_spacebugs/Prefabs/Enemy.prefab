@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3018345112868666170}
   - component: {fileID: 7676111781852014447}
   - component: {fileID: 8958939782506244876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,6 +86,14 @@ PrefabInstance:
     - target: {fileID: 1261967083292032, guid: 445ae37f24e704de890bbfda1fa7a39c, type: 3}
       propertyPath: m_Name
       value: IceBlades
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261967083292032, guid: 445ae37f24e704de890bbfda1fa7a39c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718799322928008, guid: 445ae37f24e704de890bbfda1fa7a39c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4164070437862366, guid: 445ae37f24e704de890bbfda1fa7a39c, type: 3}
       propertyPath: m_RootOrder
