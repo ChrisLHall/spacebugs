@@ -34,8 +34,5 @@ public class Player : MonoBehaviour
     private void OnShootAction(InputAction.CallbackContext context)
     {
         var bullet = Instantiate(playerBulletPrefab, transform.position, Quaternion.identity);
-        Debug.Log("Shooty shoot");
-        // todo configure speed blah blah
-        bullet.GetComponent<Rigidbody>().velocity = Vector3.up * 5f;
     }
 }

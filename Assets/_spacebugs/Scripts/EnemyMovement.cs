@@ -16,7 +16,14 @@ public class EnemyMovement : MonoBehaviour
     private Enemy[] enemies = new Enemy[0];
 
     // increase as enemies are destroyed?
-    public float moveSpeed = 2f;
+    public float MoveSpeed
+    {
+        get
+        {
+            return maxMoveSpeed / Mathf.Max(1f, enemies.Length);
+        }
+    }
+    public float maxMoveSpeed = 10f;
     private bool movingRight = true;
     public float moveDownDistance = 0.8f;
     // move down a certain distance before moving horizontal again
@@ -28,11 +35,7 @@ public class EnemyMovement : MonoBehaviour
     {
         ListEnemies();
         RecalculateRelativeEnemyPos();
-        Enemy.OnEnemyDestroyed += (enemy =>
-        {
-            ListEnemies();
-            RecalculateRelativeEnemyPos();
-        });
+        Enemy.OnEnemyDestroyed += Enemy_OnEnemyDestroyed; ;
     }
 
     private void Update()
@@ -50,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
         // Don't move down past the minimum
         if (moveDownDistanceRemaining > 0f && transform.position.y + minRelativeEnemyPos.y > moveBoundsMinPos.position.y)
         {
-            float deltaY = moveSpeed * Time.deltaTime;
+            float deltaY = MoveSpeed * Time.deltaTime;
             moveDownDistanceRemaining -= deltaY;
             transform.position += Vector3.down * deltaY;
         }
@@ -63,11 +66,17 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             // normal side to side movement
-            float deltaX = moveSpeed * Time.deltaTime;
+            float deltaX = MoveSpeed * Time.deltaTime;
             transform.position += Vector3.right * deltaX * (movingRight ? 1f : -1f);
         }
 
         // TODO what happens when they reach the bottom
+    }
+
+    private void Enemy_OnEnemyDestroyed(Enemy enemy)
+    {
+        ListEnemies();
+        RecalculateRelativeEnemyPos();
     }
 
     private void ListEnemies()
@@ -78,10 +87,10 @@ public class EnemyMovement : MonoBehaviour
     private void RecalculateRelativeEnemyPos()
     {
         if (enemies.Length == 0) { return; }
-        minRelativeEnemyPos = maxRelativeEnemyPos = enemies[0].transform.position;
+        minRelativeEnemyPos = maxRelativeEnemyPos = enemies[0].transform.localPosition;
         foreach (var enemy in enemies)
         {
-            var pos = enemy.transform.position;
+            var pos = enemy.transform.localPosition;
             minRelativeEnemyPos.x = Mathf.Min(minRelativeEnemyPos.x, pos.x);
             minRelativeEnemyPos.y = Mathf.Min(minRelativeEnemyPos.y, pos.y);
             maxRelativeEnemyPos.x = Mathf.Max(maxRelativeEnemyPos.x, pos.x);

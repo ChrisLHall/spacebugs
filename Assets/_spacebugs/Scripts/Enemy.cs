@@ -11,4 +11,14 @@ public class Enemy : MonoBehaviour
     {
         OnEnemyDestroyed(this);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var bullet = collision.gameObject.GetComponent<PlayerBullet>();
+        if (bullet != null)
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+    }
 }
