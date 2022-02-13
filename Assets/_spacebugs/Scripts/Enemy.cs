@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static event UnityAction<Enemy> OnEnemyDestroyed = delegate { };
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        OnEnemyDestroyed(this);
     }
 }
