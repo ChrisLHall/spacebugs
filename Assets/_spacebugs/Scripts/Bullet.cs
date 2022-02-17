@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float speed = 5f;
+
+    private Rigidbody2D rb;
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+
+        rb.velocity = Vector3.down * speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        var playerBullet = collision.gameObject.GetComponent<PlayerBullet>();
+        // TODO maybe some enemy bullets are indestructible etc
+        if (playerBullet != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }

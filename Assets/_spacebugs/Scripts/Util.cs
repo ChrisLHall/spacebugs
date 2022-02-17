@@ -28,4 +28,14 @@ public static class Util
         yield return wfeof;
         action();
     }
+
+    public static Vector2 ToVector2(this Vector3 vec)
+    {
+        return new Vector2(vec.x, vec.y);
+    }
+
+    public static Vector3 ToVector3(this Vector2 vec)
+    {
+        return new Vector3(vec.x, vec.y, 0f);
+    }
 }

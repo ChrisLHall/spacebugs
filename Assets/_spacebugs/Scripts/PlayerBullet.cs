@@ -6,12 +6,21 @@ public class PlayerBullet : MonoBehaviour
 {
     public float speed = 10f;
 
-    private Rigidbody rb;
+    private Rigidbody2D rb;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
 
         rb.velocity = Vector3.up * speed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var enemyBullet = collision.gameObject.GetComponent<Bullet>();
+        if (enemyBullet != null)
+        {
+            Destroy(gameObject);
+        }
     }
 }

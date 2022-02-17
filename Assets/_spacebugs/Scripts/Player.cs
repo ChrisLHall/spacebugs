@@ -12,11 +12,11 @@ public class Player : MonoBehaviour
     
     public GameObject playerBulletPrefab;
 
-    private Rigidbody rigidBody;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
-        rigidBody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         shootAction.action.started += OnShootAction;
     }
 
@@ -24,11 +24,18 @@ public class Player : MonoBehaviour
     {
         var delta = moveAction.action.ReadValue<Vector2>() * Time.deltaTime * moveSpeed;
         delta.y = 0f;
-        if (delta != Vector2.zero)
-        {
-            Debug.Log(delta);
-        }
         transform.position += new Vector3(delta.x, delta.y, 0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var bullet = collision.gameObject.GetComponent<Bullet>();
+        if (bullet != null)
+        {
+            //Destroy(gameObject);
+            Debug.Log("Ouch!");
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnShootAction(InputAction.CallbackContext context)
